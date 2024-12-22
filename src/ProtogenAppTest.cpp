@@ -21,7 +21,7 @@ public:
         return "This is a demo protogen app that is a simple template for education.";
     }
 
-    bool sanityCheck(std::string& errorMessage) const override {
+    bool sanityCheck([[maybe_unused]] std::string& errorMessage) const override {
         return true;
     }
 
@@ -34,15 +34,15 @@ public:
         return Endpoints{
             {
                 Endpoint{HttpMethod::Get, "/home"},
-                [](const Request& req, Response& res){ res.set_content("This is the homepage.", "text/html"); }
+                [](const Request&, Response& res){ res.set_content("This is the homepage.", "text/html"); }
             },
             {
                 Endpoint{HttpMethod::Get, "/hello"},
-                [](const Request& req, Response& res){ res.set_content("Hello!", "text/plain"); }
+                [](const Request&, Response& res){ res.set_content("Hello!", "text/plain"); }
             },
             {
                 Endpoint{HttpMethod::Get, "/hello/website"},
-                [](const Request& req, Response& res){ res.set_content("Hello, website!", "text/plain"); }
+                [](const Request&, Response& res){ res.set_content("Hello, website!", "text/plain"); }
             },
         };
     }

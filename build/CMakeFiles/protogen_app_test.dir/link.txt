@@ -1,1 +1,0 @@
-/usr/bin/c++ -fPIC -shared  -o libprotogen_app_test.so CMakeFiles/protogen_app_test.dir/ProtogenAppTest.cpp.o 
