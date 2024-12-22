@@ -1,0 +1,3 @@
+/usr/local/share/protogen/apps/protogenapptest/libprotogen_app_test.so
+/usr/local/share/protogen/apps/protogenapptest/resources/static/thumbnail.png
+/usr/local/share/protogen/apps/protogenapptest/resources/static/index.html
