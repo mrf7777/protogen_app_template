@@ -65,15 +65,32 @@ public:
 
     void render(ICanvas& canvas) const override {
         if(m_mouthProvider) {
+            // draw background
+            canvas.fill(127, 127, 127);
+
+            // draw based on mouth open proportion
             const double mouth_open_proportion = m_mouthProvider->proportion();
-            canvas.fill(0, std::floor(std::lerp(0.0, 255.0, mouth_open_proportion)), 0);
+            const uint8_t value = std::floor(std::lerp(0.0, 255.0, mouth_open_proportion));
+            canvas.drawPolygon({{64, 0}, {64 + 32, 0}, {64 + 32, 32}}, 0, value, value, true);
+            canvas.drawEllipse(0, 0, 32, 32, 0, value, 0, true);
+            canvas.drawLine(32, 0, 64, 32, value, 0, 0);
+            canvas.drawLine(32, 32, 64 + 32, 0, 0, 0, value);
+            // Imagine a circle at the right-most side of the canvas.
+            // Draw a line from the center to the circle based on the mouth open proportion.
+            const double angle = std::lerp(0.0, 2*M_PI, mouth_open_proportion);
+            const double radius = 13;
+            const double x = 64 + 32 + 16 + radius * std::cos(angle);
+            const double y = 16 + radius * std::sin(angle);
+            canvas.drawLine(64 + 32 + 16, 16, x, y, 0, value, 0);
+            // draw outline of circle
+            canvas.drawEllipse(64 + 32, 0, 32, 32, 0, 0, value, false);
         } else {
             canvas.fill(127, 0, 0);
         }
     }
 
     float framerate() const override {
-        return 10;
+        return 30;
     }
 
     std::vector<Resolution> supportedResolutions(const Resolution& device_resolution) const override {
