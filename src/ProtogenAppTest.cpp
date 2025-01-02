@@ -9,6 +9,12 @@ using namespace protogen;
 
 class ProtogenAppTest : public protogen::IProtogenApp {
 public:
+    ProtogenAppTest()
+        : m_deviceResolution(Resolution(0, 0)),
+        m_mouthProvider(nullptr),
+        m_active(false)
+    {}
+
     std::string name() const override {
         return "Protogen App Test";
     }
@@ -96,8 +102,12 @@ public:
         return 30;
     }
 
-    std::vector<Resolution> supportedResolutions(const Resolution& device_resolution) const override {
-        return {device_resolution};
+    void receiveDeviceResolution(const Resolution& resolution) override {
+        m_deviceResolution = resolution;
+    }
+
+    std::vector<Resolution> supportedResolutions() const override {
+        return {m_deviceResolution};
     }
 
     void setMouthProportionProvider(std::shared_ptr<IProportionProvider> provider) {
@@ -105,6 +115,7 @@ public:
     }
 
 private:
+    Resolution m_deviceResolution;
     std::shared_ptr<IProportionProvider> m_mouthProvider;
     bool m_active;
 };
