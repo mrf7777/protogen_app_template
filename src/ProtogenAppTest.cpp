@@ -38,6 +38,9 @@ public:
     void receiveResourcesDirectory([[maybe_unused]] const std::string& resourcesDirectory) override {
     }
 
+    void receiveUserDataDirectory([[maybe_unused]] const std::string& userDataDirectory) override {
+    }
+
     Endpoints serverEndpoints() const override {
         using httplib::Request, httplib::Response;
         return Endpoints{
