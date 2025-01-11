@@ -17,7 +17,6 @@ public:
         m_attributes(std::shared_ptr<StandardAttributeStore>(new StandardAttributeStore())),
         m_mouthProvider(nullptr),
         m_active(false),
-        m_initialized(false),
         m_webServerThread(),
         m_webServerPort(-1),
         m_resourcesDirectory()
@@ -119,7 +118,6 @@ private:
     std::shared_ptr<StandardAttributeStore> m_attributes;
     std::shared_ptr<IProportionProvider> m_mouthProvider;
     bool m_active;
-    bool m_initialized;
     std::thread m_webServerThread;
     int m_webServerPort;
     std::string m_resourcesDirectory;
